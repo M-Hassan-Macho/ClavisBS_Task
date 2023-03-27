@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Note extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'title',
+        'body',
+    ];
+
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_has_customers');
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_has_notes');
+    }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'company_has_notes');
+    }
+}
